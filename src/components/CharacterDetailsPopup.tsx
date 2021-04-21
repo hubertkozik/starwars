@@ -129,19 +129,22 @@ function CharacterDetailsPopup(props: IProps) {
           .then(function (response) {
             // handle success
             temp.homeworld = response.data.name;
+            axios
+              .all(films.map((movieUrl: string) => axios.get(movieUrl)))
+              .then(
+                axios.spread((...responses) => {
+                  temp.films = responses.map(
+                    (response: any) => response.data.title
+                  );
+
+                  setCharacterDetails(temp);
+                })
+              );
           })
           .catch(function (error) {
             // handle error
             console.log(error);
           });
-
-        axios.all(films.map((movieUrl: string) => axios.get(movieUrl))).then(
-          axios.spread((...responses) => {
-            temp.films = responses.map((response: any) => response.data.title);
-
-            setCharacterDetails(temp);
-          })
-        );
       })
       .catch(function (error) {
         // handle error
