@@ -34,14 +34,16 @@ function CharacterItem(props: IProps) {
   };
 
   return (
-    <Item onClick={handleItemClick}>
-      <Name>{name}</Name>
-      <Gender>{gender}</Gender>
-      <BirthYear>{birthYear}</BirthYear>
+    <>
+      <Item onClick={handleItemClick}>
+        <Name>{name}</Name>
+        <Gender>{gender}</Gender>
+        <BirthYear>{birthYear}</BirthYear>
+      </Item>
       {popupShow && (
         <CharacterDetailsPopup url={url} handleItemClick={handleItemClick} />
       )}
-    </Item>
+    </>
   );
 }
 

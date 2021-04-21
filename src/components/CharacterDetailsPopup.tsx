@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 const Darken = styled.div`
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
   top: 0;
   left: 0;
@@ -125,7 +125,7 @@ function CharacterDetailsPopup(props: IProps) {
       <Popup>
         <Header>Character Details</Header>
 
-        <Close onClick={() => handleItemClick}>Close</Close>
+        <Close onClick={handleItemClick}>Close</Close>
 
         {characterDetails ? (
           <Details>
