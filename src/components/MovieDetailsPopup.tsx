@@ -99,30 +99,6 @@ function MovieDetailsPopup(props: IProps) {
   }, [url]);
 
   const handleShowCharacters = () => {
-    // const temp: Array<string> = [];
-    // movieDetails?.characters.forEach(
-    //   (characterUrl: string, index: number, array: Array<string>) => {
-    //     axios
-    //       .get(characterUrl)
-    //       .then(function (response) {
-    //         // handle success
-    //         // setCharactersLoading(true);
-    //         // // temp.push(response.data.name);
-    //         // if (index === array.length - 1) {
-    //         //   setCharactersPlayed([...charactersPlayed, response.data.name]);
-    //         //   setCharactersLoading(false);
-    //         // }
-    //         const temp = [...charactersPlayed];
-    //         temp.push(response.data.name);
-    //         setCharactersPlayed(temp);
-    //       })
-    //       .catch(function (error) {
-    //         // handle error
-    //         alert(error);
-    //       });
-    //   }
-    // );
-
     if (movieDetails) {
       setCharactersLoading(true);
       axios
