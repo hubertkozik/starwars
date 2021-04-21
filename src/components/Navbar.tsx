@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Nav = styled.nav`
@@ -9,14 +10,17 @@ const Nav = styled.nav`
   place-items: center;
 `;
 
-const Logo = styled.h2`
+const Logo = styled(Link)`
   color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
 `;
 
 function Navbar() {
   return (
     <Nav>
-      <Logo>Star Wars Catalog</Logo>
+      <Logo to="/">Star Wars Catalog</Logo>
     </Nav>
   );
 }
