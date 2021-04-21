@@ -111,7 +111,7 @@ function CharacterDetailsPopup(props: IProps) {
       .get(url)
       .then(function (response) {
         // handle success
-        const temp = {
+        const temp: ICharacterDetails = {
           name: response.data.name,
           gender: response.data.gender,
           birthYear: response.data.birth_year,
@@ -119,8 +119,10 @@ function CharacterDetailsPopup(props: IProps) {
           eyeColor: response.data.eye_color,
           hairColor: response.data.hair_color,
           homeworld: response.data.homeworld,
-          films: response.data.films,
+          films: [],
         };
+
+        const films = response.data.films;
 
         axios
           .get(temp.homeworld)
@@ -133,22 +135,12 @@ function CharacterDetailsPopup(props: IProps) {
             console.log(error);
           });
 
-        temp.films.forEach(
-          (movieUrl: string, index: number, array: Array<string>) =>
-            axios
-              .get(movieUrl)
-              .then(function (response) {
-                // handle success
-                temp.films[index] = response.data.title;
+        axios.all(films.map((movieUrl: string) => axios.get(movieUrl))).then(
+          axios.spread((...responses) => {
+            temp.films = responses.map((response: any) => response.data.title);
 
-                if (index === array.length - 1) {
-                  setCharacterDetails(temp);
-                }
-              })
-              .catch(function (error) {
-                // handle error
-                console.log(error);
-              })
+            setCharacterDetails(temp);
+          })
         );
       })
       .catch(function (error) {
