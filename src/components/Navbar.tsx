@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Nav = styled.nav`
@@ -10,8 +11,11 @@ const Nav = styled.nav`
   place-items: center;
 `;
 
-const Logo = styled.h2`
+const Logo = styled(Link)`
   color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
 `;
 
 const Search = styled.input`
@@ -37,6 +41,7 @@ function Navbar() {
 
   return (
     <Nav>
+<<<<<<< HEAD
       <Logo>Star Wars Catalog</Logo>
       <Search
         onKeyDown={(e) => handleSendSearch(e)}
@@ -44,6 +49,9 @@ function Navbar() {
         value={searchInput}
         placeholder="Type to search"
       />
+=======
+      <Logo to="/">Star Wars Catalog</Logo>
+>>>>>>> Basic_logic_of_app
     </Nav>
   );
 }
