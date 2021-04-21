@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import CharacterItem from "./CharacterItem";
@@ -40,10 +40,14 @@ function CharacterList() {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [nextPage, setNextPage] = useState<string>("");
   const [is5Loaded, setIs5Loaded] = useState<boolean>(false);
+<<<<<<< HEAD
   const [txtInLoadButton, setTxtInLoadButton] = useState<string>(
     "Load 5 more characters"
   );
   const [maxCharacters, setMaxCharacters] = useState<number>(0);
+=======
+  const maxCharacters = useRef<number>(0);
+>>>>>>> Search_logic
 
   useEffect(() => {
     axios
@@ -58,7 +62,7 @@ function CharacterList() {
         }));
         setCharacters(temp);
         setNextPage(response.data.next);
-        setMaxCharacters(response.data.count);
+        maxCharacters.current = response.data.count;
       })
       .catch(function (error) {
         // handle error
@@ -67,7 +71,10 @@ function CharacterList() {
   }, []);
 
   const handleLoadMoreCharacters = () => {
-    if (characters.length < 80) {
+    if (
+      characters.length <
+      maxCharacters.current - (maxCharacters.current % 5)
+    ) {
       if (!is5Loaded) {
         axios
           .get(nextPage)
@@ -114,8 +121,13 @@ function CharacterList() {
             console.log(error);
           });
       }
+<<<<<<< HEAD
     } else if (characters.length === maxCharacters) {
       setTxtInLoadButton("There is no more characters to show!");
+=======
+    } else if (characters.length === maxCharacters.current) {
+      alert("brak wiecej");
+>>>>>>> Search_logic
     } else {
       axios
         .get(nextPage)
