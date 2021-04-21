@@ -10,17 +10,27 @@ interface IProps {
 }
 
 const Item = styled.div`
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid white;
   width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0.5rem 0;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #3a3a3a;
+  }
 `;
 
-const Name = styled.h3``;
+const Name = styled.h3`
+  color: #ffc500;
+  margin-bottom: 0.5rem;
+`;
 
-const Type = styled.h4``;
+const Type = styled.h4`
+  color: white;
+`;
 
 function SearchItem(props: IProps) {
   const { type, name, url } = props;

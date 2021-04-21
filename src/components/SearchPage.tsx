@@ -15,9 +15,12 @@ interface IResponse {
 }
 
 const List = styled.div`
-  display: grid;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
   place-items: center;
-  margin-top: 2rem;
+  background-color: #161616;
+  min-height: 100vh;
 `;
 
 function SearchPage() {
@@ -25,7 +28,6 @@ function SearchPage() {
   const [searchResponse, setSearchResponse] = useState<IResponse[]>([]);
 
   useEffect(() => {
-    console.log(searchValue);
     axios
       .all([
         axios.get(`https://swapi.dev/api/people/?search=` + searchValue),

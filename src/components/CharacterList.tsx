@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import CharacterItem from "./CharacterItem";
+import Stars from "./Stars";
+import ReactLoading from "react-loading";
 
 interface ICharacter {
   name: string;
@@ -13,16 +15,24 @@ interface ICharacter {
 const List = styled.div`
   display: grid;
   place-items: center;
-  margin-top: 2rem;
+  padding-top: 2rem;
+  background-color: #161616;
 `;
 
 const LoadMoreCharacters = styled.button`
-  margin-top: 2rem;
-  padding: 0.5rem 1rem;
+  margin: 4rem 0;
+  padding: 1rem 2rem;
   font-size: 1rem;
+  font-weight: 1rem;
+  border-radius: 0.75rem;
+  background-color: #ffc500;
+  outline: none;
+  border: none;
+  font-weight: bold;
 
   &:hover {
     cursor: pointer;
+    background-color: #facd38;
   }
 `;
 
@@ -30,6 +40,9 @@ function CharacterList() {
   const [characters, setCharacters] = useState<ICharacter[]>([]);
   const [nextPage, setNextPage] = useState<string>("");
   const [is5Loaded, setIs5Loaded] = useState<boolean>(false);
+  const [txtInLoadButton, setTxtInLoadButton] = useState<string>(
+    "Load 5 more characters"
+  );
   const [maxCharacters, setMaxCharacters] = useState<number>(0);
 
   useEffect(() => {
@@ -102,7 +115,7 @@ function CharacterList() {
           });
       }
     } else if (characters.length === maxCharacters) {
-      alert("brak wiecej");
+      setTxtInLoadButton("There is no more characters to show!");
     } else {
       axios
         .get(nextPage)
@@ -124,26 +137,29 @@ function CharacterList() {
   };
 
   return (
-    <List>
-      {characters.length > 0 ? (
-        <>
-          {characters.map((character) => (
-            <CharacterItem
-              name={character.name}
-              gender={character.gender}
-              birthYear={character.birthYear}
-              url={character.url}
-              key={character.name}
-            />
-          ))}
-          <LoadMoreCharacters onClick={handleLoadMoreCharacters}>
-            Load 5 more characters
-          </LoadMoreCharacters>
-        </>
-      ) : (
-        <div>Loading</div>
-      )}
-    </List>
+    <>
+      <Stars />
+      <List>
+        {characters.length > 0 ? (
+          <>
+            {characters.map((character) => (
+              <CharacterItem
+                name={character.name}
+                gender={character.gender}
+                birthYear={character.birthYear}
+                url={character.url}
+                key={character.name}
+              />
+            ))}
+            <LoadMoreCharacters onClick={handleLoadMoreCharacters}>
+              {txtInLoadButton}
+            </LoadMoreCharacters>
+          </>
+        ) : (
+          <ReactLoading type="spinningBubbles" height="30%" width="30%" />
+        )}
+      </List>
+    </>
   );
 }
 
