@@ -41,17 +41,13 @@ function Navbar() {
 
   return (
     <Nav>
-<<<<<<< HEAD
-      <Logo>Star Wars Catalog</Logo>
+      <Logo to="/">Star Wars Catalog</Logo>
       <Search
         onKeyDown={(e) => handleSendSearch(e)}
         onChange={(e) => setSearchInput(e.target.value)}
         value={searchInput}
         placeholder="Type to search"
       />
-=======
-      <Logo to="/">Star Wars Catalog</Logo>
->>>>>>> Basic_logic_of_app
     </Nav>
   );
 }
